@@ -16,13 +16,13 @@
 #     [1, 1, 0, 1], # Index 2 is connected to nodes 0, 1 and 3
 #     [0, 1, 1, 0]  # Index 3 is connected to nodes 1 and 2
 # ]
-# # As an object
-# class GraphUsingAdjacentMatrix():
-#     def __init__(self):
-#         pos0 = [0, 0, 1, 0], # Index 0 is connected to node 2
-#         pos1 = [0, 0, 1, 1], # Index 1 is connected to nodes 2, 3
-#         pos2 = [1, 1, 0, 1], # Index 2 is connected to nodes 0, 1 and 3
-#         pos3 = [0, 1, 1, 0]  # Index 3 is connected to nodes 1 and 2
+# # As a dictionary
+# graph_using_adjacent_dictionary = {
+#    "A": [0, 0, 1, 0], # Index 0 is connected to node 2
+#    "B": [0, 0, 1, 1], # Index 1 is connected to nodes 2, 3
+#    "C": [1, 1, 0, 1], # Index 2 is connected to nodes 0, 1 and 3
+#    "D": [0, 1, 1, 0]  # Index 3 is connected to nodes 1 and 2
+# }
 
 
 # Undirected unweighted graph using adjacency list
