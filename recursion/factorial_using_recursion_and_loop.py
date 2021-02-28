@@ -13,7 +13,7 @@
 #     return result
 
 
-# Using a recursion O(n)
+# Using a recursion O(n) (if multiplication would be O(1))
 def factorial_rec(number):
     """Return factorial of an integer using recursion"""
     if number > 1:
