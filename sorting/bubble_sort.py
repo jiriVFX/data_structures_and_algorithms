@@ -1,8 +1,9 @@
 # Bubble sort O(n^2) - super inefficient, space complexity O(1)
 
 def bubble_sort(num_list):
+    """Bubble sort. Sorts the list of integers passed to it as an argument."""
     for _ in num_list:
-        for i in range(len(numbers) - 1):
+        for i in range(len(num_list) - 1):
             if num_list[i] > num_list[i + 1]:
                 # Swap the two numbers
                 temp = num_list[i]
