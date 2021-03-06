@@ -1,4 +1,4 @@
-# Merge sort - O(n log n), stable
+# Merge sort - O(n log n), stable, space complexity O(n)
 
 def merge_sort(num_list):
     """Merge sort. Takes a list of integers as an argument, returns the sorted list.
