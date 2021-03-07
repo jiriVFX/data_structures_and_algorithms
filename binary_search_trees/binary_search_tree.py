@@ -52,8 +52,10 @@ class BinaryTree:
         return False
 
     # BFS - O(n) time complexity - every node has to be visited
+    # O(n) space complexity - in the worst case every node has to be in the queue
     def breadth_first_search(self):
         current_node = self.root
+        # using collections.deque() function, so we don't have to write our own here
         queue = collections.deque([])
         print_list = []
         # Start with the first node (root)
@@ -84,6 +86,47 @@ class BinaryTree:
             if current_node.right is not None:
                 queue.append(current_node.right)
             return self.bfs_recursive(queue, print_list)
+        return print_list
+
+    # DFS - O(n) time complexity - every node has to be visited
+    # O(height-of-the-tree) space complexity - every node in the current branch is added to stack
+    # Pre-order DFS traverse wrapping method
+    def depth_first_search_preorder(self):
+        return self.traverse_preorder(self.root, [])
+
+    # In-order DFS traverse wrapping method
+    def depth_first_search_inorder(self):
+        return self.traverse_inorder(self.root, [])
+
+    # Post-order DFS traverse wrapping method
+    def depth_first_search_postorder(self):
+        return self.traverse_postorder(self.root, [])
+
+    # Pre-order DFS traverse
+    def traverse_preorder(self, current_node, print_list):
+        print_list.append(current_node.value)
+        if current_node.left is not None:
+            self.traverse_preorder(current_node.left, print_list)
+        if current_node.right is not None:
+            self.traverse_preorder(current_node.right, print_list)
+        return print_list
+
+    # In-order DFS traverse
+    def traverse_inorder(self, current_node, print_list):
+        if current_node.left is not None:
+            self.traverse_inorder(current_node.left, print_list)
+        print_list.append(current_node.value)
+        if current_node.right is not None:
+            self.traverse_inorder(current_node.right, print_list)
+        return print_list
+
+    # Post-order DFS traverse
+    def traverse_postorder(self, current_node, print_list):
+        if current_node.left is not None:
+            self.traverse_postorder(current_node.left, print_list)
+        if current_node.right is not None:
+            self.traverse_postorder(current_node.right, print_list)
+        print_list.append(current_node.value)
         return print_list
 
         # # Not Working
@@ -146,8 +189,16 @@ binary_search_tree.insert(15)
 binary_search_tree.insert(170)
 
 # print(binary_search_tree.lookup(170))
-print(binary_search_tree.breadth_first_search())
 
-# Calling the recursive BFS
-new_queue = collections.deque([binary_search_tree.root])
-print(binary_search_tree.bfs_recursive(new_queue, print_list=[]))
+# Calling Breadth First Search method
+# print(binary_search_tree.breadth_first_search())
+# Calling the recursive BFS method
+# new_queue = collections.deque([binary_search_tree.root])
+# print(binary_search_tree.bfs_recursive(new_queue, print_list=[]))
+
+# Calling Pre-order Depth First Search method
+print(binary_search_tree.depth_first_search_preorder())
+# Calling In-order Depth First Search method
+print(binary_search_tree.depth_first_search_inorder())
+# Calling Post-order Depth First Search method
+print(binary_search_tree.depth_first_search_postorder())
