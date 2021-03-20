@@ -159,18 +159,28 @@ class LinkedList:
             second = first.next
 
             while second is not None:
-                # Very difficult to understand without drawing on the paper
+                # Difficult to understand without drawing on the paper
                 # Draw a list on the paper and go number by number
                 temp = second.next
-                print(f"temp = {temp.data}")
+                # When second is the end of the list
+                if temp is not None:
+                    print(f"temp = {temp.data}")
+                else:
+                    print(f"temp = None")
+
                 second.next = first
                 print(f"second.next = {first.data}")
                 first = second
                 print(f"first = {second.data}")
                 second = temp
-                print(f"second = {temp.data}")
-
-            # Head is the tail now and there is nothing after it
+                # When temp is after the end of the list = None
+                if temp is not None:
+                    print(f"second = {temp.data}")
+                else:
+                    print(f"second = None")
+            # Head is now the tail and there is nothing after it
+            # self.head.next points to what is now the previous node
+            # Not using self.head.next = None would result in infinite loop
             self.head.next = None
             self.head = first
 
