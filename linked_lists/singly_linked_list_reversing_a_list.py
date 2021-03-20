@@ -150,7 +150,7 @@ class LinkedList:
             return "Index is out of range."
 
     def reverse(self):
-        if self.head.next is None:
+        if self.head is None or self.head.next is None:
             return self.head
         else:
             first = self.head
