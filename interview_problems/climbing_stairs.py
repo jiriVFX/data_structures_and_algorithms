@@ -22,4 +22,28 @@ def climb_stairs(n):
             return fibonacci[n]
 
 
+# Version with variable number of stairs we can climb each time
+def climb_stairs_x(n, x=[1, 2]):
+    """
+    :type n: int
+    :type x: list
+    :rtype: int
+    """
+    # O(n^2) time complexity
+    fibonacci = [0, 1]
+    if n > 1:
+        for i in range(2, n + 2):
+            current = 0
+            for j in x:
+                if i - j >= 0:
+                    current += fibonacci[i - j]
+            fibonacci.append(current)
+        print(fibonacci)
+        return fibonacci[n + 1]
+    else:
+        if n >= 0:
+            return fibonacci[n]
+
+
 print(climb_stairs(5))
+print(climb_stairs_x(5, [1, 2, 3]))
