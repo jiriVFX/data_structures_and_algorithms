@@ -5,7 +5,7 @@
 
 # Time complexity O(n)
 # Space complexity O(n)
-def majorityElement(nums):
+def majority_element(nums):
     """
     :type nums: List[int]
     :rtype: int
@@ -30,6 +30,24 @@ def majorityElement(nums):
     return majority_element
 
 
-print(majorityElement([2, 2, 1, 1, 1, 2, 2]))
-print(majorityElement([3, 2, 3]))
-print(majorityElement([1]))
+print(majority_element([2, 2, 1, 1, 1, 2, 2]))
+print(majority_element([3, 2, 3]))
+print(majority_element([1]))
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# The same but with sorting
+# Time complexity O(n log n)
+# Space complexity O(1)
+def majority_element_sort(nums):
+    """
+    :type nums: List[int]
+    :rtype: int
+    """
+    nums.sort()
+    return nums[len(nums) // 2]
+
+
+print(majority_element_sort([2, 2, 1, 1, 1, 2, 2]))
+print(majority_element_sort([3, 2, 3]))
+print(majority_element_sort([1]))
