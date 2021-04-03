@@ -66,7 +66,6 @@ class BinaryTree:
             current_node = queue.popleft()
             # Add node value to the print_list
             print_list.append(current_node.value)
-
             if current_node.left is not None:
                 queue.append(current_node.left)
             if current_node.right is not None:
