@@ -6,7 +6,7 @@
 #   2. Open brackets must be closed in the correct order.
 
 
-# O(n) time complexity, O(n) space complexity
+# Stack solution - O(n) time complexity, O(n) space complexity
 def is_valid(s):
     """
     :type s: str
