@@ -12,6 +12,7 @@
 #         self.val = x
 #         self.next = None
 
+# Solution 1 - using set (hash set)
 # O(n) time complexity, O(n) space complexity
 class Solution(object):
     def has_cycle(self, head):
@@ -28,5 +29,26 @@ class Solution(object):
 
             seen.add(current)
             current = current.next
+
+        return False
+
+
+# Solution 2 - Floyd’s Cycle-Finding Algorithm
+# O(n) time complexity, O(1) space complexity
+
+class Solution2(object):
+    def has_cycle2(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        slow = head
+        fast = head
+
+        while slow and fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                return True
 
         return False
