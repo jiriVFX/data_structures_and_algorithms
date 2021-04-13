@@ -43,5 +43,36 @@ class Solution(object):
                     if current_b is not None:
                         nodes_set.add(current_b)
                         current_b = current_b.next
+        # if both pointers reach the end of the list, there is no intersection
+        return None
 
+
+# Solution2
+# O(n) time complexity (but with more iterations than the previous solution), O(1) space complexity
+class Solution2(object):
+    def getIntersectionNode2(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        """
+        current_a = headA
+        current_b = headB
+
+        while current_a or current_b:
+            # if the two pointers meet, current node is intersection
+            if current_a is current_b:
+                return current_a
+
+            if current_a is None:
+                # if at the end, start over from headB
+                current_a = headB
+            else:
+                current_a = current_a.next
+
+            if current_b is None:
+                # if at the end, start over from headA
+                current_b = headA
+            else:
+                current_b = current_b.next
+        # if both pointers reach the end at the same time, there is no intersection
         return None
