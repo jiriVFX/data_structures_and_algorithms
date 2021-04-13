@@ -48,7 +48,7 @@ class Solution(object):
 
 
 # Solution2
-# O(n) time complexity (but with more iterations than the previous solution), O(1) space complexity
+# O(n) time complexity, O(1) space complexity
 class Solution2(object):
     def getIntersectionNode2(self, headA, headB):
         """
