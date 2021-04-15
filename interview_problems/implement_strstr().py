@@ -131,35 +131,35 @@
 # # print(str_str2(haystack="mississippi", needle="pi"))
 # print(str_str2(haystack="babba", needle="bbb"))
 
-# def str_str3(haystack, needle):
-#     # Build the prefix-suffix list - find the longest prefix-suffix in needle
-#     i = 1
-#     j = 0
-#     prefix_suffix = [-1]
-#
-#     while i < len(needle):
-#         if j == -1 or needle[i] == needle[j]:
-#             prefix_suffix.append(i + 1)
-#             i += 1
-#             j += 1
-#         else:
-#             j = prefix_suffix[j]
-#         prefix_suffix.append(0)
-#
-#     print(prefix_suffix)
-#     i = 0
-#     j = 0
-#     while i < len(haystack) and j < len(needle):
-#         if j == -1 or haystack[i] == needle[j]:
-#             i += 1
-#             j += 1
-#         else:
-#             j = prefix_suffix[j]
-#
-#     if j == len(needle):
-#         return i - j
-#     else:
-#         return -1
+def str_str3(haystack, needle):
+    # Build the prefix-suffix list - find the longest prefix-suffix in needle
+    i = 1
+    j = 0
+    prefix_suffix = [-1]
+
+    while i < len(needle):
+        if j == -1 or needle[i] == needle[j]:
+            prefix_suffix.append(i + 1)
+            i += 1
+            j += 1
+        else:
+            j = prefix_suffix[j]
+        prefix_suffix.append(0)
+
+    print(prefix_suffix)
+    i = 0
+    j = 0
+    while i < len(haystack) and j < len(needle):
+        if j == -1 or haystack[i] == needle[j]:
+            i += 1
+            j += 1
+        else:
+            j = prefix_suffix[j]
+
+    if j == len(needle):
+        return i - j
+    else:
+        return -1
 
 
 # print(str_str3(haystack="mississippi", needle="issip"))
