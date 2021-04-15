@@ -52,7 +52,6 @@ def my_sqrt2(x):
 print(my_sqrt2(1))
 print(my_sqrt2(36))
 print(my_sqrt2(3))
-print(my_sqrt2(2147395599))
 print(my_sqrt2(4))
 print(my_sqrt2(5))
 print(my_sqrt2(8))
