@@ -42,7 +42,7 @@ nums_4 = [1, 2]
 # print(nums_4)
 
 
-# Solution 2 - cyclic replacements
+# Solution 2 - cyclic replacements - performs same as or slightly worse than the first solution on LeetCode
 # O(n) time complexity, O(1) space complexity
 def rotate_2(nums, k):
     """
