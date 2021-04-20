@@ -3,7 +3,7 @@
 # If reversing x causes the value to go outside the signed 32-bit integer range [-2^31, 2^31 - 1], then return 0.
 # Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
 
-# Solution 1  - string reversion
+# Solution 1  - string reversion - proved slightly faster than division
 # O(log10 x) time complexity (number of digits), O(1) space complexity
 def reverse(x):
     """
@@ -40,7 +40,7 @@ def reverse(x):
 # print(reverse(1534236469))
 
 
-# Solution 2 - division - slightly faster
+# Solution 2 - division
 # O(log10 x) time complexity (number of digits), O(n) space complexity (number of digits)
 def reverse_2(x):
     """
