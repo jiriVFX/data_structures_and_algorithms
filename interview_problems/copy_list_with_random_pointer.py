@@ -44,7 +44,7 @@ class Solution(object):
             # move current to the next after the copied node
             current = current.next.next
 
-            # add random pointers --------------------------------------------------------------------------------------
+        # add random pointers --------------------------------------------------------------------------------------
 
         # we have to replicate the random pointers for the copied nodes
         # also we have to break pointers of the copied nodes to the original nodes
