@@ -47,7 +47,7 @@ def trap(height):
 
 # Solution 2 - dynamic programming - optimized solution 1
 # O(n) time complexity, O(n) space complexity
-def trap(height):
+def trap_2(height):
     """
     :type height: List[int]
     :rtype: int
@@ -76,8 +76,8 @@ def trap(height):
         # add current max value to max_left
         max_right.append(max_height)
 
-    print(max_left)
-    print(max_right)
+    # print(max_left)
+    # print(max_right)
     # Now we just check each position against our max_heights lists
     # to find the max amount of water that can be trapped
     for i in range(1, len(height) - 1):
@@ -91,5 +91,5 @@ def trap(height):
     return trapped_rainwater
 
 
-print(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))
-print(trap([4, 2, 0, 3, 2, 5]))
+print(trap_2([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))
+print(trap_2([4, 2, 0, 3, 2, 5]))
