@@ -11,65 +11,6 @@ def next_permutation(nums):
     :type nums: List[int]
     :rtype: None Do not return anything, modify nums in-place instead.
     """
-    # # find out if numbers in a list are descending
-    # descending = True
-    # for i in range(1, len(nums)):
-    #     if nums[i] > nums[i - 1]:
-    #         descending = False
-    #         break
-    # # if the numbers are descending, sort them
-    # if descending:
-    #     nums.sort()
-    # else:
-    #     # find the smallest and second smallest numbers,
-    #     # move the second smallest to the position of the smallest on the left
-    #     smallest_idx = None
-    #     # find the smallest
-    #     for i in range(1, len(nums)):
-    #         if smallest_idx is None:
-    #             smallest_idx = i
-    #             continue
-    #         if nums[i] <= nums[smallest_idx]:
-    #             smallest_idx = i
-    #     # find the second smallest
-    #     second_idx = None
-    #     for i in range(len(nums)):
-    #         # second smallest must be smaller than any other number except the smallest number
-    #         # it must also have higher index than the smallest number,
-    #         # so we always get higher number when swapping the two
-    #         # second smallest must not be at index 0, so it can be moved to the left
-    #         if nums[i] > nums[smallest_idx] and i > smallest_idx:
-    #             # if it's the first time
-    #             if second_idx is None:
-    #                 second_idx = i
-    #             # f it's not the first time
-    #             elif nums[i] <= nums[second_idx]:
-    #                 second_idx = i
-    #
-    #     # Now we have both smallest and second smallest numbers' indexes
-    #     # The next step is to move the second smallest number to the left
-    #     # In case we don't have second_idx, it means we have to insert smallest_idx at the beginning of the list
-    #     if second_idx is not None:
-    #         temp = nums[smallest_idx]
-    #         nums[smallest_idx] = nums[second_idx]
-    #         nums[second_idx] = temp
-    #     else:
-    #         if nums[smallest_idx] > nums[0]:
-    #             smallest_num = nums.pop()
-    #             # Works only in new versions of Python, doesn't add two lists together on LeetCode
-    #             # nums = [smallest_num] + nums
-    #             # LeetCode solution (less efficient)
-    #             nums.insert(0, smallest_num)
-    #         else:
-    #             temp = nums[0]
-    #             nums[0] = nums[1]
-    #             nums[1] = temp
-    #
-    #             temp = nums[smallest_idx]
-    #             nums[smallest_idx] = nums[smallest_idx - 1]
-    #             nums[smallest_idx - 1] = temp
-    # return nums
-
     # find out if numbers in a list are descending
     i = len(nums) - 1
     # nums are in descending order
