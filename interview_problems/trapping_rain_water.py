@@ -91,5 +91,61 @@ def trap_2(height):
     return trapped_rainwater
 
 
-print(trap_2([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))
-print(trap_2([4, 2, 0, 3, 2, 5]))
+# print(trap_2([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))
+# print(trap_2([4, 2, 0, 3, 2, 5]))
+
+
+# Solution 3 - two pointers - the best solution
+# O(n) time complexity, O(1) space complexity
+def trap_3(height):
+    """
+    :type height: List[int]
+    :rtype: int
+    """
+    trapped_rainwater = 0
+    # max pointers must start where side pointers start
+    max_left = 0
+    max_right = len(height) - 1
+    left = 0
+    right = len(height) - 1
+
+    while left < right:
+        # choose the pointer with less height
+        if height[left] <= height[right]:
+            # if the pointer has the same or higher height, it is recorded as the current maximum at its side
+            if height[left] >= height[max_left]:
+                max_left = left
+            # if the pointer is smaller than maximum height on its side, we calculate trapped water at the position
+            else:
+                # if current height is lower, water can be trapped
+                # trapped rainwater is max_left minus current height
+                # we already know height left is smaller than height right so it is the minimum wall
+                rainwater = height[max_left] - height[left]
+                # add rainwater trapped at the current position to the overal result
+                trapped_rainwater += rainwater
+                # print(rainwater)
+
+            # increment left
+            left += 1
+        else:
+            # if the pointer has the same or higher height, it is recorded as the current maximum at its side
+            if height[right] >= height[max_right]:
+                max_right = right
+            # if the pointer is smaller than maximum height on its side, we calculate trapped water at the position
+            else:
+                # if current height is lower, water can be trapped
+                # trapped rainwater is max_right minus current height
+                # we already know height right is smaller than height left so it is the minimum wall
+                rainwater = height[max_right] - height[right]
+                # add rainwater trapped at the current position to the overal result
+                trapped_rainwater += rainwater
+
+            # decrement right
+            right -= 1
+
+    return trapped_rainwater
+
+
+print(trap_3([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))
+print(trap_3([4, 2, 0, 3, 2, 5]))
+print(trap_3([4, 2, 3]))
