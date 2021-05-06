@@ -26,33 +26,33 @@ def surface_area(grid):
 
                 # if there are cubes on the left
                 if j > 0 and grid[i][j - 1] > 0:
-                    # subract the smaller of two fields (the actual number of touching sides)
+                    # subtract the smaller of two fields (the actual number of touching sides)
                     sides_to_subtract = min(grid[i][j], grid[i][j - 1])
                     # subtract touching sides on the left
                     area = area - sides_to_subtract
 
                 # if there are cubes on the right
                 if j < len(grid[i]) - 1 and grid[i][j + 1] > 0:
-                    # subract the smaller of two fields (the actual number of touching sides)
+                    # subtract the smaller of two fields (the actual number of touching sides)
                     sides_to_subtract = min(grid[i][j], grid[i][j + 1])
                     # subtract touching sides on the left
                     area = area - sides_to_subtract
 
                 # if there are cubes in the previous row
                 if i > 0 and grid[i - 1][j] > 0:
-                    # subract the smaller of two fields (the actual number of touching sides)
+                    # subtract the smaller of two fields (the actual number of touching sides)
                     sides_to_subtract = min(grid[i][j], grid[i - 1][j])
                     # subtract touching sides on the left
                     area = area - sides_to_subtract
 
                 # if there are cubes in the next row
                 if i < len(grid[i]) - 1 and grid[i + 1][j] > 0:
-                    # subract the smaller of two fields (the actual number of touching sides)
+                    # subtract the smaller of two fields (the actual number of touching sides)
                     sides_to_subtract = min(grid[i][j], grid[i + 1][j])
                     # subtract touching sides on the left
                     area = area - sides_to_subtract
 
-                    # if the current field is empty
+            # if the current field is empty
             else:
                 area = 0
 
