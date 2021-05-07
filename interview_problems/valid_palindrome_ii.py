@@ -9,25 +9,17 @@ def valid_palindrome(s):
     :type s: str
     :rtype: bool
     """
-    # check pair of letters from both ends of the string against each other
-    if len(s) < 2:
+    if len(s) == 1:
         return True
-
-    skip = -1
 
     # check for non-matching pair
     for i in range(len(s) // 2):
         if s[i] != s[len(s) - (1 + i)]:
             # if chars don't match
-            skip = i
-            break
-
-    # if s is not already a palindrome
-    if skip != -1:
-        # try to skip one char from left and one from right
-        # to see whether either of them creates a valid palindrome
-        return is_palindrome(s, skip + 1, len(s) - (1 + i)) or is_palindrome(s, skip, len(s) - (2 + i))
-    # is skip = -1 it is already palindrome from the start
+            # try to skip one char from left and one from right
+            # to see whether either of them creates a valid palindrome
+            return is_palindrome(s, i + 1, len(s) - (1 + i)) or is_palindrome(s, i, len(s) - (2 + i))
+    # if all char pairs match, it is already a palindrome from the start
     return True
 
 
