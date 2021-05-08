@@ -23,7 +23,7 @@ class Solution(object):
         # traverse the linked list from head
         # count each node
         # when left position reached (counter == left), start reversing
-        # finish reveresing when counter == right meaning right position was reached
+        # finish reversing when counter == right meaning right position was reached
         # reconnect non reversed parts of the list with the reversed part
         # e.g. 1 -> 4 and 2 -> 5 now
 
