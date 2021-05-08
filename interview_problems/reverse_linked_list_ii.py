@@ -7,6 +7,9 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
+# Solution 1 - in-place reversal
+# O(N) time complexity, O(1) space complexity
 class Solution(object):
     def reverseBetween(self, head, left, right):
         """
