@@ -17,6 +17,9 @@ class Node(object):
 """
 
 
+# Solution 1 - simple iterative
+# O(n) time complexity (node gets visited max 2 times => O(2n) at worst)
+# O(1) space complexity
 class Solution(object):
     def flatten(self, head):
         """
