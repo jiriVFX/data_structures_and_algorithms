@@ -39,3 +39,54 @@ class Solution(object):
             current = current.next
 
         return current
+
+
+# Solution 2 - Fast and slow pointer (Floyd's Tortoise and Hare algorithm)
+# O(n) time complexity
+# O(1) space complexity
+class Solution2(object):
+    def detectCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if head is None or head.next is None:
+            return None
+
+        fast = head
+        # to start the while loop, we need to initialize slow inside the loop
+        # otherwise fast == slow from the beginning and we will never enter the first loop
+        slow = None
+
+        # traverse the list until fast and slow pointer meet at the same node
+        while fast != slow:
+            # if there is no cycle (fast reaches the end of the list first), return None
+            if fast is None or fast.next is None:
+                return None
+
+            # if this is the first iteration
+            if slow is None:
+                slow = head
+
+            # advance fast
+            fast = fast.next.next
+            # advance slow
+            slow = slow.next
+
+        # fast and slow have met at the same node
+        # initialize both pointers again,
+        # this time, both pointers !must! advance only one node at the time
+        # (otherwise they meet at the same node as in the previous loop)
+        # the node at which both pointers meet this time, is the start of the cycle
+
+        # one pointer has to start from the head,
+        # the other starts from where it is currently (the node at which they have both previously met)
+        slow = head
+
+        while fast != slow:
+            fast = fast.next
+            slow = slow.next
+
+        # the node at which both pointers meet again is the start of the cycle
+        # we can return fast or slow, both are at the same node
+        return fast
