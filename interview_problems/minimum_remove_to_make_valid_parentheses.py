@@ -58,3 +58,52 @@ def min_remove_to_make_valid(s):
                 s = s[:position]
 
     return s
+
+
+# print(min_remove_to_make_valid("lee(t(c)o)de)"))
+# print(min_remove_to_make_valid("a)b(c)d"))
+# print(min_remove_to_make_valid("))(("))
+# print(min_remove_to_make_valid("(a(b(c)d)"))
+
+# Solution 1.1 - optimized solution 1 - turning s into a list
+# O(n) time complexity, O(n) space complexity - using stack
+def min_remove_to_make_valid2(s):
+    """
+    :type s: str
+    :rtype: str
+    """
+    stack = []
+    s = list(s)
+
+    for i in range(len(s)):
+        if s[i] == "(":
+            # save position of the bracket instead of the bracket itself
+            stack.append(i)
+        elif s[i] == ")":
+            # if it is a closing bracket
+            if len(stack) > 0:
+                # if there is at least one opening bracket in the stack
+                # remove opening bracket from a stack
+                stack.pop()
+            else:
+                # if there are no opening brackets in the stack,
+                # replace the closing bracket with an empty string
+                s[i] = ""
+
+    # check whether there are any opening brackets left in the stack
+    # that would mean we have to remove the opening brackets left in the stack at the positions we saved
+    if len(stack) > 0:
+        for position in stack:
+            # every iteration one bracket is replaced with an empty string
+            s[position] = ""
+
+    # convert list back to string
+    s = "".join(s)
+
+    return s
+
+
+print(min_remove_to_make_valid2("lee(t(c)o)de)"))
+print(min_remove_to_make_valid2("a)b(c)d"))
+print(min_remove_to_make_valid2("))(("))
+print(min_remove_to_make_valid2("(a(b(c)d)"))
