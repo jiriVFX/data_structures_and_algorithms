@@ -1,5 +1,5 @@
 # Binary search can be used to find an item in a sorted list(array)
-# O(log N) time complexity
+# O(log n) time complexity
 # O(1) space complexity
 def binary_search(num_list, item_to_find):
     """Binary search. Takes list of numbers and the item to be found as parameters.
