@@ -13,10 +13,12 @@ def binary_search(num_list, item_to_find):
     middle = (left + right) // 2
 
     # divide in halves as long as left an right pointer don't cross each other
-    # or until we have found item_to_find, when num_list[middle] == item_to_find
-    # when right and left cross, we have either found the item_to_find or it is not in the list
-    while left <= right and num_list[middle] != item_to_find:
-        if item_to_find > num_list[middle]:
+    # when right and left cross, the item_to_find is not in the list
+    while left <= right:
+        if num_list[middle] == item_to_find:
+            # if item_to_find has been found, return its position (the middle pointer)
+            return middle
+        elif item_to_find > num_list[middle]:
             # if the item we search for is larger than the middle,
             # search on the right side of the middle
             left = middle + 1
@@ -28,12 +30,8 @@ def binary_search(num_list, item_to_find):
         # recalculate middle
         middle = (left + right) // 2
 
-    if left > right:
-        # if item_to_find is not in the list, return -1
-        return -1
-    else:
-        # otherwise return item's index in the list
-        return middle
+    # if item_to_find has not been found, it's not in the list
+    return -1
 
 
 nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 68]
