@@ -3,7 +3,7 @@
 # Note that it is the kth largest element in the sorted order, not the kth distinct element.
 
 # Quickselect solution
-# O(n^2) time complexity (when the pivot is the largest item, but can be O(N) in best case)
+# O(n^2) time complexity (when the pivot is the largest item, but can be O(n) in best case)
 # O(1) space complexity
 def find_kth_largest(nums, k):
     """
