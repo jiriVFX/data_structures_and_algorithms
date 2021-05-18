@@ -55,3 +55,41 @@ class Solution(object):
             right_values.append(current_level[-1])
 
         return right_values
+
+
+# Solution 2 - DFS
+# O(n) time complexity, O(n) space complexity
+class Solution2(object):
+    def rightSideView(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        if root is None:
+            return []
+
+        # keep the rightmost values in the list
+        right_values = []
+
+        # call recursive DFS
+        self.dfs_preorder(root, 0, right_values)
+
+        return right_values
+
+    # DFS - Depth First Search - Preorder
+    def dfs_preorder(self, current_node, level, right_values):
+        # basecase
+        if current_node is None:
+            return
+
+        # append values only if the current level is higher than any previous one (length of right_values)
+        if level >= len(right_values):
+            right_values.append(current_node.val)
+
+        # traverse right
+        if current_node.right is not None:
+            self.dfs_preorder(current_node.right, level + 1, right_values)
+
+        # traverse left
+        if current_node.left is not None:
+            self.dfs_preorder(current_node.left, level + 1, right_values)
