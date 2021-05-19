@@ -60,7 +60,7 @@ class Solution(object):
             middle = math.ceil((left + right) / 2.0)
             # go to the middle node
             # if middle is not None, left becomes middle + 1
-            # if middle is None, right becomes middlde - 1
+            # if middle is None, right becomes middle - 1
             if self.check_node(root, middle, height):
                 left = middle
             else:
