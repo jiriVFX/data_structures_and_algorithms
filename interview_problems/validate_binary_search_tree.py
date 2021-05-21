@@ -41,3 +41,36 @@ class Solution(object):
 
         # If we've got here, it must be a valid BST
         return True
+
+
+# Solution 2 - iterative DFS
+# O(n) time complexity, O(n) space complexity
+class Solution(object):
+    # Using Depth First Search to go through the tree and validate
+    def isValidBST(self, root):
+        """
+        :type root: list
+        :rtype: bool
+        """
+        if root is None:
+            return True
+
+        # we have to make our own stack
+        # Older versions of Python don't have math.inf module, we have to use float("inf") instead
+        stack = [[root, -float("inf"), float("inf")]]
+
+        while len(stack) > 0:
+            current = stack.pop()
+            current_node = current[0]
+            min_val = current[1]
+            max_val = current[2]
+
+            if current_node.val <= min_val or current_node.val >= max_val:
+                return False
+            if current_node.left is not None:
+                stack.append([current_node.left, min_val, current_node.val])
+            if current_node.right is not None:
+                stack.append([current_node.right, current_node.val, max_val])
+
+        # If we have got this far, the tree is a valid BST
+        return True
