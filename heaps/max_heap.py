@@ -1,6 +1,9 @@
-# parent = (index - 1) // 2
-# left_child = (index * 2) + 1
-# right_child = (index * 2) + 2
+# Max-heap implemented as priority queue
+# the largest value in the heap is always the root - first in the list (array)
+# Formulas for finding parent and child nodes in the list:
+#   parent = (index - 1) // 2
+#   left_child = (index * 2) + 1
+#   right_child = (index * 2) + 2
 
 class MaxHeap:
     def __init__(self, heap_list=[]):
@@ -9,6 +12,7 @@ class MaxHeap:
     def print(self):
         print(self.heap_list)
 
+    # O(log n - height of the tree) time complexity, O(n) space complexity
     def pop(self):
         # swap the first and the last elements
         self.heap_list[0] = self.heap_list[-1]
@@ -16,7 +20,30 @@ class MaxHeap:
         self.heap_list.pop()
         # sift to make sure root is the largest value
         self.sift_down()
-        self.print()
+
+    # O(log n - height of the tree) time complexity, O(n) space complexity
+    def add(self, item):
+        self.heap_list.append(item)
+        self.sift_up()
+
+    def sift_up(self):
+        i = len(self.heap_list) - 1
+
+        while True:
+            parent = (i - 1) // 2
+
+            if parent < 0:
+                break
+            # check whether child's value is larger than its parent's value
+            # swap the child and the parent until reaching beginning of the list
+            if self.heap_list[i] > self.heap_list[parent]:
+                temp = self.heap_list[parent]
+                self.heap_list[parent] = self.heap_list[i]
+                self.heap_list[i] = temp
+                # continue from parents position and skip other nodes
+                i = parent
+            else:
+                i -= 1
 
     def sift_down(self):
         for i in range(len(self.heap_list)):
@@ -41,9 +68,10 @@ class MaxHeap:
                     self.heap_list[right_child] = temp
 
 
-
-
-
 max_heap = MaxHeap([75, 50, 25, 45, 35, 10, 15, 20, 40])
-max_heap.pop()
-max_heap.pop()
+# max_heap.pop()
+# max_heap.print()
+# max_heap.pop()
+# max_heap.print()
+max_heap.add(46)
+max_heap.print()
