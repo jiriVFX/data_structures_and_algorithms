@@ -34,12 +34,18 @@ class MaxHeap:
     # O(log n - height of the tree) time complexity, O(n) space complexity
     def pop(self):
         if len(self.heap_list) > 0:
-            # swap the first and the last elements
-            self.heap_list[0] = self.heap_list[-1]
+            # store popped item to return it at the end
+            popped = self.heap_list[0]
+
+            if len(self.heap_list) > 1:
+                # swap the first and the last elements
+                self.heap_list[0] = self.heap_list[-1]
             # remove the last element
             self.heap_list.pop()
             # sift to make sure root is the largest value
             self.sift_down()
+
+            return popped
 
     # O(log n - height of the tree) time complexity, O(n) space complexity
     def add(self, item):
@@ -61,33 +67,43 @@ class MaxHeap:
                 # continue from parents position and skip other nodes
                 i = parent
             else:
-                i -= 1
+                break
 
     def sift_down(self):
-        for i in range(len(self.heap_list)):
+        i = 0
+
+        while i < len(self.heap_list) - 1:
             left_child = (i * 2) + 1
             right_child = (i * 2) + 2
 
-            if right_child >= len(self.heap_list):
+            if left_child >= len(self.heap_list):
                 break
 
             # choose the child with the larger value
             # check whether its value is larger than its parent's value
             # swap the child and the parent until reaching end of the list
-            if self.heap_list[left_child] > self.heap_list[right_child]:
-                if self.heap_list[i] < self.heap_list[left_child]:
-                    self.swap(i, left_child)
-            else:
+            if right_child < len(self.heap_list) and self.heap_list[right_child] > self.heap_list[left_child]:
                 if self.heap_list[i] < self.heap_list[right_child]:
                     self.swap(i, right_child)
+                    # move pointer to original left child position
+                    i = right_child
+                else:
+                    break
+            else:
+                if self.heap_list[i] < self.heap_list[left_child]:
+                    self.swap(i, left_child)
+                    # move pointer to original right child position
+                    i = left_child
 
 
-max_heap = MaxHeap([75, 50, 25, 45, 10, 15, 20, 40, 35])
-# max_heap.pop()
-# max_heap.print()
-# max_heap.pop()
-# max_heap.print()
-# max_heap.add(46)
+max_heap = MaxHeap([80, 76, 60, 49, 42, 15, 24, 40, 35])
+print(max_heap.pop())
+max_heap.print()
+print(max_heap.pop())
+max_heap.print()
+max_heap.add(46)
+max_heap.print()
+max_heap.add(51)
 max_heap.print()
 print(max_heap.peek())
 print(max_heap.is_empty())
