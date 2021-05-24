@@ -12,14 +12,34 @@ class MaxHeap:
     def print(self):
         print(self.heap_list)
 
+    def peek(self):
+        if len(self.heap_list) > 0:
+            return self.heap_list[0]
+        else:
+            return None
+
+    def is_empty(self):
+        if len(self.heap_list) == 0:
+            return True
+        return False
+
+    def length(self):
+        return len(self.heap_list)
+
+    def swap(self, a, b):
+        temp = self.heap_list[a]
+        self.heap_list[a] = self.heap_list[b]
+        self.heap_list[b] = temp
+
     # O(log n - height of the tree) time complexity, O(n) space complexity
     def pop(self):
-        # swap the first and the last elements
-        self.heap_list[0] = self.heap_list[-1]
-        # remove the last element
-        self.heap_list.pop()
-        # sift to make sure root is the largest value
-        self.sift_down()
+        if len(self.heap_list) > 0:
+            # swap the first and the last elements
+            self.heap_list[0] = self.heap_list[-1]
+            # remove the last element
+            self.heap_list.pop()
+            # sift to make sure root is the largest value
+            self.sift_down()
 
     # O(log n - height of the tree) time complexity, O(n) space complexity
     def add(self, item):
@@ -37,9 +57,7 @@ class MaxHeap:
             # check whether child's value is larger than its parent's value
             # swap the child and the parent until reaching beginning of the list
             if self.heap_list[i] > self.heap_list[parent]:
-                temp = self.heap_list[parent]
-                self.heap_list[parent] = self.heap_list[i]
-                self.heap_list[i] = temp
+                self.swap(parent, i)
                 # continue from parents position and skip other nodes
                 i = parent
             else:
@@ -58,20 +76,18 @@ class MaxHeap:
             # swap the child and the parent until reaching end of the list
             if self.heap_list[left_child] > self.heap_list[right_child]:
                 if self.heap_list[i] < self.heap_list[left_child]:
-                    temp = self.heap_list[i]
-                    self.heap_list[i] = self.heap_list[left_child]
-                    self.heap_list[left_child] = temp
+                    self.swap(i, left_child)
             else:
                 if self.heap_list[i] < self.heap_list[right_child]:
-                    temp = self.heap_list[i]
-                    self.heap_list[i] = self.heap_list[right_child]
-                    self.heap_list[right_child] = temp
+                    self.swap(i, right_child)
 
 
-max_heap = MaxHeap([75, 50, 25, 45, 35, 10, 15, 20, 40])
+max_heap = MaxHeap([75, 50, 25, 45, 10, 15, 20, 40, 35])
 # max_heap.pop()
 # max_heap.print()
 # max_heap.pop()
 # max_heap.print()
-max_heap.add(46)
+# max_heap.add(46)
 max_heap.print()
+print(max_heap.peek())
+print(max_heap.is_empty())
