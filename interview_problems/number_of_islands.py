@@ -8,7 +8,8 @@ from collections import deque
 
 
 # Breadth-First-Search Solution
-# O(n) time complexity - every field should be visited only once, O(n) space complexity
+# O(n) time complexity - every field should be visited only once
+# O(n) space complexity or O(m * n - the matrix diagonal)
 class Solution(object):
     def __init__(self):
         self.queue = deque([])
