@@ -8,7 +8,7 @@ from collections import deque
 
 
 # Breadth-First-Search Solution
-# O(n) time complexity - every field should be visited only once
+# O(n) time complexity or O(m * n) - every field should be visited only once
 # O(n) space complexity or O(m * n - the matrix diagonal)
 class Solution(object):
     def __init__(self):
