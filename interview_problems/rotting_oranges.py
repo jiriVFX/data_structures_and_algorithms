@@ -23,6 +23,10 @@ class Solution(object):
         :type grid: List[List[int]]
         :rtype: int
         """
+        # reset self variables before running again
+        # necessary only when running locally, LeetCode re-initializes objects for each test case
+        self.__init__()
+
         rotten_oranges = []
 
         for row in range(len(grid)):
@@ -44,6 +48,8 @@ class Solution(object):
             return -1
         return self.minutes
 
+    # Breadth First Search helper method
+    # simply looks on each side around current position for fresh oranges
     def bfs(self, rotten_oranges, grid):
         queue = deque(rotten_oranges)
         queue_length = len(queue)
@@ -53,19 +59,13 @@ class Solution(object):
             # keep track of rounds / levels to count minutes passed
             # every level is a minute
             if counter == queue_length:
-                print(counter)
                 self.minutes += 1
-                print(queue)
                 counter = 0
                 queue_length = len(queue)
 
             current = queue.popleft()
-            # we have to rot oranges at the same time as adding them to a queue,
+            # we have to rot oranges at the same time as adding them to the queue,
             # otherwise they might be added multiple times
-            # # if orange is not rotten, rot it
-            # if grid[current[0]][current[1]] == 1:
-            #     grid[current[0]][current[1]] = 2
-            #     self.fresh -= 1
 
             # check for orange up
             if current[0] - 1 >= 0 and grid[current[0] - 1][current[1]] == 1:
@@ -95,7 +95,9 @@ class Solution(object):
             # increment counter
             counter += 1
 
+
 solution = Solution()
 print(solution.oranges_rotting([[2, 1, 1], [1, 1, 0], [0, 1, 1]]))
 print(solution.oranges_rotting([[2, 1, 1], [0, 1, 1], [1, 0, 1]]))
 print(solution.oranges_rotting([[0, 2]]))
+print(solution.oranges_rotting([[2, 2], [1, 1], [0, 0], [2, 0]]))
