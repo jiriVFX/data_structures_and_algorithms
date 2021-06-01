@@ -48,7 +48,12 @@ class Graph:
 
             # check adjacency list for connections
             if len(self.adjacency_list[current]) > 0:
-                for vertex in self.adjacency_list[current]:
+                # we have to traverse the adjacency list from the end or reverse it
+                # so the first connected vertex is the last added to the stack
+                # in the next iteration, the first vertex from the adjacency list will be popped
+                # this is necessary, otherwise the returned values list is in different order
+                # compared to the one returned by the recursive method
+                for vertex in reversed(self.adjacency_list[current]):
                     # add all connected vertices,
                     # but only if they were not visited yet
                     if vertex not in seen:
@@ -83,6 +88,6 @@ class Graph:
 
 list_of_connections = [[1, 3], [0], [3, 8], [0, 2, 4, 5], [3, 6], [3], [4, 7], [6], [2]]
 graph = Graph(list_of_connections)
-print(graph.bfs_traversal(0))
-print(graph.dfs_traversal(0))
-print(graph.dfs_traversal_recursive(0))
+print(f"Graph BFS:     {graph.bfs_traversal(0)}")
+print(f"Graph DFS:     {graph.dfs_traversal(0)}")
+print(f"Recursive DFS: {graph.dfs_traversal_recursive(0)}")
