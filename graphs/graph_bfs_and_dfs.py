@@ -5,7 +5,7 @@ class Graph:
     def __init__(self, adjacency_list):
         self.adjacency_list = adjacency_list
 
-    # O(n) time complexity
+    # O(v + e) time complexity (every node and every edge is visited)
     # O(n) space complexity
     def bfs_traversal(self, start):
         if len(self.adjacency_list) > 0:
@@ -30,7 +30,7 @@ class Graph:
 
         return values
 
-    # O(n) time complexity
+    #  O(v + e) time complexity (every node and every edge is visited)
     # O(n) space complexity
     def dfs_traversal(self, start):
         if len(self.adjacency_list) > 0:
@@ -57,8 +57,32 @@ class Graph:
 
         return values
 
+    # O(v + e) time complexity (every node and every edge is visited)
+    # O(n) space complexity
+    # main driving method
+    def dfs_traversal_recursive(self, start):
+        if len(self.adjacency_list) > 0:
+            values = []
+            seen = set()
+            return self.dfs_recursive(start, values, seen)
+
+    # recursive traversal method
+    def dfs_recursive(self, vertex, values, seen):
+        # append actual vertex value to return at the end
+        values.append(vertex)
+        # remember visited vertices
+        seen.add(vertex)
+
+        for connected_vertex in self.adjacency_list[vertex]:
+            # call itself on every not visited connected vertex
+            if connected_vertex not in seen:
+                self.dfs_recursive(connected_vertex, values, seen)
+
+        return values
+
 
 list_of_connections = [[1, 3], [0], [3, 8], [0, 2, 4, 5], [3, 6], [3], [4, 7], [6], [2]]
 graph = Graph(list_of_connections)
 print(graph.bfs_traversal(0))
 print(graph.dfs_traversal(0))
+print(graph.dfs_traversal_recursive(0))
