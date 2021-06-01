@@ -128,54 +128,6 @@ class BinaryTree:
         print_list.append(current_node.value)
         return print_list
 
-        # # Not Working
-        # def remove(self, value):
-        #     # Search for the node with the value
-        #     # If the node is a leaf, delete the node
-        #     # If the node has a child, replace the node with the child
-        #     # If the node has more children, replace the node with the child on the right (with larger value)
-        #     if self.root is None:
-        #         return False
-        #     current_node = self.root
-        #
-        #     parent_node = None
-        #     while current_node is not None:
-        #         if value > current_node.value:
-        #             parent_node = current_node
-        #             current_node = current_node.right
-        #         elif value < current_node.value:
-        #             parent_node = current_node
-        #             current_node = current_node.left
-        #         elif value == current_node.value:
-        #             # This is the node we are looking for
-        #             if current_node.right is None:
-        #                 # If current node has no child on the right
-        #                 if parent_node is None:
-        #                     # If parent_node is still None, the current_node must be root node
-        #                     self.root = current_node.left
-        #                 else:
-        #                     if current_node.value > parent_node.value:
-        #                         # Make the child of the current_node (to be removed) the child of the parent_node
-        #                         # So parent node will be pointing on the child of the current_node
-        #                         parent_node.right = current_node.left
-        #                     elif current_node.value < parent_node.value:
-        #                         parent_node.left = current_node.left
-        #
-        #             elif current_node.left is None:
-        #                 # If parent_node is still None, the current_node must be root node
-        #                 if parent_node is None:
-        #                     # If parent_node is still None, the current_node must be root node
-        #                     self.root = current_node.right
-        #                 else:
-        #                     if current_node.value > parent_node.value:
-        #                         # Make the child of the current_node (to be removed) the child of the parent_node
-        #                         # So parent node will be pointing on the child of the current_node
-        #                         parent_node.right = current_node.right
-        #                     elif current_node.value < parent_node.value:
-        #                         parent_node.left = current_node.right
-        # # If the node has not been found, return False
-        # return False
-
 
 binary_search_tree = BinaryTree()
 
