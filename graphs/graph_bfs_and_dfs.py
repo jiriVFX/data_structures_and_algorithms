@@ -36,15 +36,15 @@ class Graph:
         if len(self.adjacency_list) > 0:
             stack = [start]
             values = []
-            seen = set()
+            seen = [False for vertex in range(len(self.adjacency_list))]
 
         while len(stack) > 0:
             current = stack.pop()
-            if current not in seen:
+            if not seen[current]:
                 # append actual vertex value to return at the end
                 values.append(current)
                 # remember visited vertices
-                seen.add(current)
+                seen[current] = True
 
             # check adjacency list for connections
             if len(self.adjacency_list[current]) > 0:
@@ -56,7 +56,7 @@ class Graph:
                 for vertex in reversed(self.adjacency_list[current]):
                     # add all connected vertices,
                     # but only if they were not visited yet
-                    if vertex not in seen:
+                    if not seen[vertex]:
                         # add to a stack
                         stack.append(vertex)
 
@@ -68,7 +68,7 @@ class Graph:
     def dfs_traversal_recursive(self, start):
         if len(self.adjacency_list) > 0:
             values = []
-            seen = set()
+            seen = [False for vertex in range(len(self.adjacency_list))]
             return self.dfs_recursive(start, values, seen)
 
     # recursive traversal method
@@ -76,11 +76,11 @@ class Graph:
         # append actual vertex value to return at the end
         values.append(vertex)
         # remember visited vertices
-        seen.add(vertex)
+        seen[vertex] = True
 
         for connected_vertex in self.adjacency_list[vertex]:
             # call itself on every not visited connected vertex
-            if connected_vertex not in seen:
+            if not seen[connected_vertex]:
                 self.dfs_recursive(connected_vertex, values, seen)
 
         return values
