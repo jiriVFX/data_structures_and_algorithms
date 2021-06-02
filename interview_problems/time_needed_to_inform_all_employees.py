@@ -12,7 +12,7 @@
 # Return the number of minutes needed to inform all the employees about the urgent news.
 
 
-# O(vertices + edges) time complexity
+# O(n) time complexity
 # O(n) space complexity
 class Solution(object):
     def __init__(self):
@@ -45,24 +45,18 @@ class Solution(object):
             if manager[i] != -1:
                 self.adjacency_dict[manager[i]].append(i)
 
-        # print(self.adjacency_dict)
-
         # Traverse the graph and count the minutes --------------------------------------------------
         # DFS traversal
         if len(self.adjacency_dict) > 0:
-            seen = [False for vertex in range(len(manager))]
-            self.dfs_recursive(headID, 0, seen, informTime)
+            self.dfs_recursive(headID, 0, informTime)
             return self.max_minutes
         else:
             return 0
 
     # recursive traversal method
-    def dfs_recursive(self, vertex, minutes, seen, inform_time):
-        # add infromTime to minutes
+    def dfs_recursive(self, vertex, minutes, inform_time):
+        # keep track of maximum time it takes to reach all employees
         self.max_minutes = max(minutes, self.max_minutes)
-
-        # remember visited vertices
-        seen[vertex] = True
 
         # check whether vertex is manager (has any subordinates / children vertices)
         if vertex in self.adjacency_dict:
@@ -70,8 +64,8 @@ class Solution(object):
 
             for connection in connections:
                 # call itself on every not visited connected vertex
-                if not seen[connection]:
-                    self.dfs_recursive(connection, minutes + inform_time[vertex], seen, inform_time)
+                self.dfs_recursive(connection, minutes + inform_time[vertex], inform_time)
+
 
 solution = Solution()
 print(solution.numOfMinutes(n=1, headID=0, manager=[-1], informTime=[0]))
