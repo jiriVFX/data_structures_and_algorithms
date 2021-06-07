@@ -66,7 +66,66 @@ class Solution(object):
         return True
 
 
-solution = Solution()
-print(solution.canFinish(20, [[0, 10], [3, 18], [5, 5], [6, 11], [11, 14], [13, 1], [15, 1], [17, 4]]))
-print(solution.canFinish(2, [[1, 0], [0, 1]]))
-print(solution.canFinish(2, [[1, 0]]))
+# Solution 2 - Topological sort
+# On(n^2) time complexity, O(n^2) space complexity
+class Solution2(object):
+
+    def canFinish(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+        # build an adjacency list --------------------------------------------------------------------------------------
+        adjacency = [[] for x in range(numCourses)]
+
+        for vertex in prerequisites:
+            adjacency[vertex[1]].append(vertex[0])
+
+        # build indegree list ------------------------------------------------------------------------------------------
+        indegree = [0 for _ in range(numCourses)]
+
+        # count number of directions pointing at each vertex - indegree value
+        for connection in prerequisites:
+            vertex = connection[0]
+            indegree[vertex] += 1
+
+        # topological sort - DAG(Directed Acyclic Graph) ---------------------------------------------------------------
+        # look for vertex with 0 connections - 0 pointers pointing at it - indegree value 0
+        indegree_len = len(indegree) - 1
+        stack = []
+
+        # fill stack
+        for i in range(len(indegree)):
+            if indegree[i] == 0:
+                stack.append(i)
+
+        while len(stack) > 0:
+            current = stack.pop()
+            connected_vertices = adjacency[current]
+
+            # iterate over all connected vertices,
+            for connection in connected_vertices:
+                # reduce number of connections of vertices the removed vertex is pointing to in indegree list
+                indegree[connection] -= 1
+                # reduce indegree_len with every processed/removed vertex
+                indegree_len -= 1
+                # if connection became 0, append it to the stack
+                if indegree[connection] == 0:
+                    stack.append(connection)
+
+        # check whether all connections from indegree list were removed
+        if indegree_len > 0:
+            return False
+        return True
+
+
+# solution = Solution()
+# print(solution.canFinish(20, [[0, 10], [3, 18], [5, 5], [6, 11], [11, 14], [13, 1], [15, 1], [17, 4]]))
+# print(solution.canFinish(2, [[1, 0], [0, 1]]))
+# print(solution.canFinish(2, [[1, 0]]))
+
+solution2 = Solution2()
+print(solution2.canFinish(20, [[0, 10], [3, 18], [5, 5], [6, 11], [11, 14], [13, 1], [15, 1], [17, 4]]))
+print(solution2.canFinish(2, [[1, 0], [0, 1]]))
+print(solution2.canFinish(2, [[1, 0]]))
