@@ -92,7 +92,7 @@ class Solution2(object):
 
         # topological sort - DAG(Directed Acyclic Graph) ---------------------------------------------------------------
         # look for vertex with 0 connections - 0 pointers pointing at it - indegree value 0
-        indegree_len = len(indegree) - 1
+        indegree_len = len(indegree)
         stack = []
 
         # fill stack
@@ -103,13 +103,13 @@ class Solution2(object):
         while len(stack) > 0:
             current = stack.pop()
             connected_vertices = adjacency[current]
+            # reduce indegree_len with every processed/removed vertex
+            indegree_len -= 1
 
             # iterate over all connected vertices,
             for connection in connected_vertices:
                 # reduce number of connections of vertices the removed vertex is pointing to in indegree list
                 indegree[connection] -= 1
-                # reduce indegree_len with every processed/removed vertex
-                indegree_len -= 1
                 # if connection became 0, append it to the stack
                 if indegree[connection] == 0:
                     stack.append(connection)
