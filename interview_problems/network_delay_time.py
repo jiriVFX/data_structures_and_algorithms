@@ -215,8 +215,8 @@ class Solution(object):
 
 
 # Bellman-Ford algorithm
-# O(E log n) time complexity
-# O(E + n) space complexity
+# O(n * e) time complexity
+# O(n) space complexity
 class Solution2(object):
     def networkDelayTime(self, times, n, k):
         """
