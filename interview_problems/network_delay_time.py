@@ -191,7 +191,7 @@ class Solution(object):
             # current = min_heap.pop()
             current = heapq.heappop(heap_list)
             connections = adjacency[current]
-            print(connections)
+
             # iterate over connected vertices
             for i in range(len(connections)):
                 vertex = connections[i][0]
@@ -206,7 +206,6 @@ class Solution(object):
 
         # get the maximum from shortest list -------------------------------------------------------------------
         # find maximum distance in shortest except position 0, which we have not used
-        print("Did not get here")
         maximum = max(shortest[1:])
         # if maximum is infinity, it means all vertices can't be reached(at least one vertex is disconnected)
         if maximum == float("inf"):
@@ -215,9 +214,64 @@ class Solution(object):
             return maximum
 
 
-solution = Solution()
-print(solution.networkDelayTime([[2, 1, 1], [2, 3, 1], [3, 4, 1]], 4, 2))
-print(solution.networkDelayTime(
+# Bellman-Ford algorithm
+# O(E log n) time complexity
+# O(E + n) space complexity
+class Solution2(object):
+    def networkDelayTime(self, times, n, k):
+        """
+        :type times: List[List[int]]
+        :type n: int
+        :type k: int
+        :rtype: int
+        """
+        # create shortest path list ----------------------------------------------------------------------------
+        # would be math.inf in Python 3 instead of float("inf")
+        # list is +1 in length as vertices start from 1, we don't use 0
+        distances = [float("inf") for _ in range(n + 1)]
+        distances[k] = 0
+
+        # Bellman-Ford algorithm -------------------------------------------------------------------------------
+        # Much easier to implement compared Dijkstra's
+        # we just need distances list to store the shortest distance to each node found
+        for i in range(n):
+            # check every connection distance against distance in distances list
+            # if shorter distance is found, replace the corresponding value in distances list
+            changed = False
+            for j in range(len(times)):
+                start_vertex = times[j][0]
+                dest_vertex = times[j][1]
+                current_distance = times[j][2]
+                if distances[dest_vertex] > distances[start_vertex] + current_distance:
+                    changed = True
+                    distances[dest_vertex] = distances[start_vertex] + current_distance
+
+            # if no distance was changed, quit iterating to save time
+            if not changed:
+                break
+
+        # get the maximum from shortest list -------------------------------------------------------------------
+        # find maximum distance in shortest except position 0, which we have not used
+        maximum = max(distances[1:])
+        # if maximum is infinity, it means all vertices can't be reached(at least one vertex is disconnected)
+        if maximum == float("inf"):
+            return -1
+        else:
+            return maximum
+
+
+print("Dijkstra's algorithm:")
+dijkstra = Solution()
+print(dijkstra.networkDelayTime([[2, 1, 1], [2, 3, 1], [3, 4, 1]], 4, 2))
+print(dijkstra.networkDelayTime(
+    [[3, 5, 78], [2, 1, 1], [1, 3, 0], [4, 3, 59], [5, 3, 85], [5, 2, 22], [2, 4, 23], [1, 4, 43], [4, 5, 75],
+     [5, 1, 15], [1, 5, 91], [4, 1, 16], [3, 2, 98], [3, 4, 22], [5, 4, 31], [1, 2, 0], [2, 5, 4], [4, 2, 51],
+     [3, 1, 36], [2, 3, 59]], 5, 5, ))
+
+print("\nBellman-Ford algorithm:")
+bellman_ford = Solution2()
+print(bellman_ford.networkDelayTime([[2, 1, 1], [2, 3, 1], [3, 4, 1]], 4, 2))
+print(bellman_ford.networkDelayTime(
     [[3, 5, 78], [2, 1, 1], [1, 3, 0], [4, 3, 59], [5, 3, 85], [5, 2, 22], [2, 4, 23], [1, 4, 43], [4, 5, 75],
      [5, 1, 15], [1, 5, 91], [4, 1, 16], [3, 2, 98], [3, 4, 22], [5, 4, 31], [1, 2, 0], [2, 5, 4], [4, 2, 51],
      [3, 1, 36], [2, 3, 59]], 5, 5, ))
