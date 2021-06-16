@@ -8,7 +8,9 @@
 # The knight continues moving until it has made exactly k moves or has moved off the chessboard.
 # Return the probability that the knight remains on the board after it has stopped moving.
 
-
+# Solution one - bottom up approach
+# Time complexity - O(k * n^2)
+# Space complexity - O(n^2)
 def knightProbability(n, k, row, column):
     """
     :type n: int
@@ -36,22 +38,13 @@ def knightProbability(n, k, row, column):
     ]
 
     # Initialize position lists to hold moves probability
-    positions = []
-
-    # k + 1 number of tables
-    for i in range(k + 1):
-        positions.append([])
-        # rows
-        for j in range(n):
-            positions[i].append([])
-            # columns
-            for l in range(n):
-                positions[i][j].append(0.0)
+    positions_prev = [[0.0 for i in range(n)] for j in range(n)]
+    positions_next = [[0.0 for i in range(n)] for j in range(n)]
 
     # set the starting position probability
     # be careful to initialize all values as float in Python 2.x - not necessary in Python 3.x
-    positions[0][row][column] = 1.0
-    print(positions)
+    positions_prev[row][column] = 1.0
+
     # do k number of moves ----------------------------------------------------------------------------------------
     for step in range(1, k + 1):
         for r in range(n):
@@ -67,7 +60,11 @@ def knightProbability(n, k, row, column):
                         pass
                     else:
                         # add probability in positions (divided by 8 - number of all possible moves)
-                        positions[step][r][c] += positions[step - 1][knight_r][knight_c] / 8
+                        positions_next[r][c] += positions_prev[knight_r][knight_c] / 8
+
+        # move current positions to positions_prev and initialize positions_next for the next step
+        positions_prev = positions_next
+        positions_next = [[0.0 for i in range(n)] for j in range(n)]
 
     # return result -------------------------------------------------------------------------------------------------
     probability = 0.0
@@ -75,10 +72,12 @@ def knightProbability(n, k, row, column):
     # make a sum of all probabilities
     for r in range(n):
         for c in range(n):
-            probability += positions[k][r][c]
+            # only positions_prev has values as positions_next is filled with zeroes
+            probability += positions_prev[r][c]
 
     return probability
 
 
 print(knightProbability(n=3, k=2, row=0, column=0))
 print(knightProbability(n=1, k=0, row=0, column=0))
+print(knightProbability(n=8, k=30, row=6, column=4))
