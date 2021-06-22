@@ -6,9 +6,9 @@
 # 3. Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.
 
 
-# Solution 1 - backtracking
+# Solution - backtracking
 # O(9!^9) time complexity - number of rows, columns and possible values combined
-# O(9*3 + 81) space complexity - box, rows, columns sets we store + call stack
+# O(9*3 + 81) space complexity - box, rows, columns sets stored + call stack
 class Solution(object):
     def solveSudoku(self, board):
         """
@@ -16,7 +16,6 @@ class Solution(object):
         :rtype: None Do not return anything, modify board in-place instead.
         """
         # initialization and setup
-
         board_size = len(board)
         # initialize lists with sets to remember numbers in each box, row, column
         boxes = []
@@ -42,20 +41,20 @@ class Solution(object):
                     # add to columns
                     cols[c].add(number)
 
-        # Backtracking ----------------------------------------------------------------------------------------
+        # Backtracking -------------------------------------------------------------------------------------------------
         self.backtrack(board, boxes, rows, cols, 0, 0)
 
-    # -------------------------------------------------------------------------------------------------------------
+    #  Helper methods --------------------------------------------------------------------------------------------------
     def get_box_id(self, row, col):
         row_num = (row // 3) * 3
         col_num = col // 3
-        # calculate the square inside which is the current cell
+        # calculates the square 3x3 box inside which is the current cell
         square_id = col_num + row_num
 
         return square_id
 
     def contains(self, box, row, col, num):
-        # Check whether number is already contained in the current box, row or column
+        # Checks whether number is already contained in the current box, row or column
         if num in box or num in row or num in col:
             return True
         return False
